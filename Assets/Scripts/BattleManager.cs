@@ -32,7 +32,7 @@ public class BattleManager : MonoBehaviour
     void Start() { }
 
     void Update() {
-      if (Input.GetKeyDown(KeyCode.T) && !battleActive) {
+      if (Input.GetButtonDown("Fire1") && !battleActive) {
         InitializeBattle(new string[] {"devil", "devil"});
       }
 
@@ -54,6 +54,8 @@ public class BattleManager : MonoBehaviour
 
     void InitializeBattle(string[] enemiesToLoad) {
       if (battleActive) return;
+
+      AudioManager.instance.PlayBgm("Battle1");
 
       battleActive = true;
       CommandPanels.gameObject.SetActive(false);
@@ -138,6 +140,7 @@ public class BattleManager : MonoBehaviour
     }
 
     public void ClickCommand(int buttonId) {
+      AudioManager.instance.PlaySfx("Select1");
       CommandPanels.gameObject.SetActive(false);
       var command = ((Hero)currentPanel.Unit).Commands[buttonId];
       DetermineTargetType(command.Action.TargetType);
