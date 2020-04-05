@@ -7,11 +7,11 @@ public class CurrentHeroPanel : MonoBehaviour
   public int Constitution;
   public Text CurHp, MaxHp;
 
-  public GameObject Setup(BattlePanel panel) {
+  public void Setup(BattlePanel panel) {
     HeroImage.sprite = panel.Unit.Sprite;
     StatusImage.gameObject.SetActive(false);
     CurHp.text = panel.Unit.CurHp.ToString();
     MaxHp.text = $"/{ panel.Unit.MaxHp }";
-    return gameObject;
+    gameObject.SetActive(true);
   }
 }

@@ -4,20 +4,22 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleManager : MonoBehaviour
-{
+public class BattleManager : MonoBehaviour {
+
   public static BattleManager Instance;
-
-  public EventSystem EventSystem;
-
   public Hero[] HeroesToImport;
 
   [Header("Panel Refs")]
   public HeroPanel[] HeroPanels;
   public EnemyPanel[] EnemyPanels;
-  public CommandPanels CommandPanels;
+  public CommandMenu CommandMenu;
+  public EnemyList EnemyList;
   public CurrentHeroPanel CurrentHeroPanel;
-  public GameObject FightPanel;
+  public FightMenu FightMenu;
+
+  [Header("Button Groups")]
+  public ButtonGroup EnemyMenu;
+  public ButtonGroup HeroMenu;
 
   bool battleActive, turnWaiting, choosingEnemyTarget, choosingHeroTarget;
   List<BattlePanel> activeBattlers = new List<BattlePanel>();
@@ -28,37 +30,43 @@ public class BattleManager : MonoBehaviour
       Instance = this;
       DontDestroyOnLoad(gameObject);
     }
-    
-    void Start() { }
 
     void Update() {
-      if (Input.GetButtonDown("Fire1") && !battleActive) {
+      // To Launch Test Battle
+      if (!battleActive) {
         InitializeBattle(new string[] {"devil", "devil"});
       }
 
-      if (CommandPanels.isActive) {
-        if (Input.GetButtonDown("Horizontal") && Input.GetAxisRaw("Horizontal") != 0) {
-          CommandPanels.HorizontalMovement();
-          Debug.Log($"Swapping pages to: { CommandPanels.PageNumber }");
-        }
-        else if (Input.GetButtonDown("Vertical")) {
-          CommandPanels.VerticalMovement(Input.GetAxisRaw("Vertical"));
-        }
-        if (!battleActive || turnWaiting) return;
+      if (!battleActive || turnWaiting) return;
+
+      // button controls
+      if (Input.GetButtonDown("Horizontal")) {
+        if (choosingEnemyTarget) { Debug.Log("Choose Enemy: Horizontal"); return; }
+        else if (CommandMenu.isActive) { CommandMenu.HorizontalMovement(); }
+      }
+      else if (Input.GetButtonDown("Vertical")) {
+        if (choosingEnemyTarget) { Debug.Log("Choose Enemy: Vertical"); return; }
+        else if (CommandMenu.isActive) { CommandMenu.VerticalMovement(Input.GetAxisRaw("Vertical")); }
       }
     }
 
-    void FixedUpdate() {
-
+    void CleanupBattleScene() {
+      CommandMenu.Hide();
+      CurrentHeroPanel.gameObject.SetActive(false);
+      FightMenu.Hide();
+      EnemyMenu.Disable();
+      HeroMenu.Disable();
+      CommandMenu.Disable();
+      FightMenu.Disable();
     }
 
     void InitializeBattle(string[] enemiesToLoad) {
       if (battleActive) return;
 
-      AudioManager.instance.PlayBgm("Battle1");
+      // AudioManager.instance.PlayBgm("Battle1");
 
       battleActive = true;
-      CommandPanels.gameObject.SetActive(false);
+      CleanupBattleScene();
       // set gamemanager battle active
 
       // Heroes
@@ -74,6 +82,7 @@ public class BattleManager : MonoBehaviour
       }
 
       // Enemies
+
       for(var i = 0; i < EnemyPanels.Length; i++) {
         if (i >= enemiesToLoad.Length) { 
           EnemyPanels[i].gameObject.SetActive(false);
@@ -86,15 +95,37 @@ public class BattleManager : MonoBehaviour
         }
       }
       
+      SetupEnemyList();
+
       activeBattlers.AddRange(HeroPanels.Where(p => p.gameObject.activeInHierarchy).ToList());
       activeBattlers.AddRange(EnemyPanels.Where(p => p.gameObject.activeInHierarchy).ToList());
 
-      BattleFlow();
+      FightCheck();
+    }
+
+    void SetupEnemyList() {
+      EnemyList.Clear();
+
+      for (var i = 0; i < EnemyPanels.Length; i++) {
+        if (!EnemyPanels[i].gameObject.activeInHierarchy) { break; }
+
+        for (var j = 0; j < EnemyList.EnemyNames.Length; j++) {
+          if (EnemyList.EnemyNames[j].text == EnemyPanels[i].Unit.Name) {
+            EnemyList.EnemyQty[j]++;
+            break;
+          } else if (EnemyList.EnemyNames[j].text == "") {
+            EnemyList.EnemyNames[j].text = EnemyPanels[i].Unit.Name;
+            EnemyList.EnemyQty[j]++;
+            break;
+          }
+        }
+      }
+      EnemyList.SetQtys();
+      EnemyList.gameObject.SetActive(true);
     }
 
     void BattleFlow() {
       if (turnOrder.Count == 0) {
-        FightCheck();
         DetermineTurnOrder();
       }
       currentPanel = turnOrder[0];
@@ -103,55 +134,81 @@ public class BattleManager : MonoBehaviour
       turnWaiting = true;
 
       if (currentPanel.IsHero) {
-        Debug.Log("Hero Turn!");
-        CurrentHeroPanel.Setup(currentPanel).SetActive(true);
-        if (((HeroPanel)currentPanel).LastUsedAction is null) {
-          CommandPanels.PageNumber = 0;
-          CommandPanels.CursorPos = 0;
-        }
-        var commands = ((Hero)currentPanel.Unit).Commands.Where(c => c != null).ToList();
-        for (var i = 0; i < CommandPanels.Commands.Length; i++) {
-          if (i < commands.Count) {
-            CommandPanels.Commands[i].Setup(commands[i]);
-          } else {
-            CommandPanels.Commands[i].Clear();
-          }
-        }
-        CommandPanels.gameObject.SetActive(true);
-        CommandPanels.SetPages();
-
       } else {
         Debug.Log("Enemy Turn!");
       }
     }
 
     void FightCheck() {
-      FightPanel.SetActive(true);
-      
+      SetupEnemyList();
+      FightMenu.Setup();
+      EventSystem.current.SetSelectedGameObject(null);
+      EventSystem.current.SetSelectedGameObject(FightMenu.Commands[0].Button.gameObject);
+      turnOrder.Clear();
+    }
+
+    void ChooseCommands() {
+      FightMenu.Hide();
+      FightMenu.Disable();
+
+      currentPanel = turnOrder[0];
+      turnOrder.RemoveAt(0);
+
+      if (((HeroPanel)currentPanel).LastUsedAction is null) {
+        CommandMenu.PageNumber = 0;
+        CommandMenu.CursorPos = 0;
+      }
+      var commands = ((Hero)currentPanel.Unit).Commands.Where(c => c != null).ToList();
+      for (var i = 0; i < CommandMenu.Commands.Length; i++) {
+        if (i < commands.Count) {
+          CommandMenu.Commands[i].Setup(commands[i]);
+        } else {
+          CommandMenu.Commands[i].Clear();
+        }
+      }
+      CurrentHeroPanel.Setup(currentPanel);
+      CommandMenu.gameObject.SetActive(true);
+      CommandMenu.SetPages();
+
     }
 
     void DetermineTurnOrder() {
       Debug.Log("Determining Turn Order");
       for (var i = 0; i < activeBattlers.Count; i++) {
         activeBattlers[i].RollInitiative();
-        Debug.Log($"{ activeBattlers[i].Unit.Name}: { activeBattlers[i].Initiative } ");
+        Debug.Log($"{ activeBattlers[i].Unit.Name}: { activeBattlers[i].Initiative }");
       }
       turnOrder = activeBattlers.OrderByDescending(t => t.Initiative).ToList();
     }
 
     public void ClickCommand(int buttonId) {
       AudioManager.instance.PlaySfx("Select1");
-      CommandPanels.gameObject.SetActive(false);
-      var command = ((Hero)currentPanel.Unit).Commands[buttonId];
-      DetermineTargetType(command.Action.TargetType);
 
-      Debug.Log($"Button with ID: { buttonId } was clicked -> { command.Name }.");
+      if (FightMenu.isActive) {
+        EnemyList.gameObject.SetActive(false);
+        foreach(var panel in HeroPanels.Where(hp => hp.gameObject.activeInHierarchy)) {
+          turnOrder.Add(panel);
+        }
+        ChooseCommands();
+        return;
+      }
+
+      var command = ((Hero)currentPanel.Unit).Commands[buttonId];
+      Debug.Log($"Button with ID: { buttonId } was clicked -> { command.Name }!");
+
+      // CommandPanels.gameObject.SetActive(false);
+      DetermineTargetType(command.Action.TargetType);
     }
 
     void DetermineTargetType(TargetTypes type) {
       if (type == TargetTypes.OneEnemy) {
         var enemy = EnemyPanels.First(p => !p.IsDead);
-        enemy.Cursor.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(enemy.GetComponent<Button>().gameObject);
+        CommandMenu.Disable();
+        EnemyMenu.Enable();
+        // enemy.GetComponent<Button>().Select();
+        choosingEnemyTarget = true;
       }
     }
 
