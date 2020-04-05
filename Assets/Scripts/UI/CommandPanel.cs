@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class CommandPanel : MonoBehaviour {
+public class CommandPanel : MenuButton {
   public Text Name, Amt;
   public Image Image;
-  public Button Button;
   public Command Command;
 
   public void Setup(Command command) {

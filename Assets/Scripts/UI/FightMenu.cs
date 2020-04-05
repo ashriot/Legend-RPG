@@ -1,5 +1,5 @@
 ﻿
-public class FightMenu : ButtonGroup {
+public class FightMenu : ButtonMenu {
   
   public bool isActive { get { return gameObject.activeInHierarchy; } }
   public int CursorPos;
