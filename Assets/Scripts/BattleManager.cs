@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleManager : MonoBehaviour {
+public class BattleManager : Singleton<BattleManager> {
 
   public static BattleManager Instance;
   public Hero[] HeroesToImport;
@@ -15,7 +15,7 @@ public class BattleManager : MonoBehaviour {
   public CommandMenu CommandMenu;
   public EnemyList EnemyList;
   public CurrentHeroPanel CurrentHeroPanel;
-  public FightMenu FightMenu;
+  public ButtonMenu FightMenu;
 
   [Header("Button Groups")]
   public ButtonMenu EnemyMenu;
@@ -25,16 +25,6 @@ public class BattleManager : MonoBehaviour {
   List<BattlePanel> activeBattlers = new List<BattlePanel>();
   List<BattlePanel> turnOrder = new List<BattlePanel>();
   BattlePanel currentPanel;
-
-  void Awake() {
-    if (Instance is null) {
-      Instance = this;
-    } else {
-      Destroy(gameObject);
-    }
-
-    DontDestroyOnLoad(gameObject);
-  }
 
   void Update() {
     // FOR TESTING
@@ -135,12 +125,13 @@ public class BattleManager : MonoBehaviour {
 
   void FightCheck() {
     SetupEnemyList();
-    FightMenu.Setup();
-    FightMenu.Commands[0].OnSelect();
     turnOrder.Clear();
+    FightMenu.Enable();
+    Debug.Log("Enabling Fight Menu");
   }
 
   void ChooseCommands() {
+    Debug.Log("Choose command");
     FightMenu.Hide();
 
     currentPanel = turnOrder[0];
@@ -200,5 +191,8 @@ public class BattleManager : MonoBehaviour {
       choosingEnemyTarget = true;
     }
   }
+}
 
+class BattleMenuManager : MenuManager {
+  
 }

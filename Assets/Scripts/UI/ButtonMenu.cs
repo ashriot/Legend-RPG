@@ -3,77 +3,67 @@ using UnityEngine;
 
 public class ButtonMenu : MonoBehaviour {
 
-  public Sprite selectedSprite;
   public ButtonMenu nextMenu;
-  public List<MenuButton> MenuButtons = new List<MenuButton>();
+  public List<MenuButton> MenuButtons;
 
   public bool isActive { get { return gameObject.activeInHierarchy; } }
-  public int CursorPos, menuSize;
-  // public CommandPanel[] Commands;
+  public int CursorPos;
 
-  void Start() {
-    OnButtonSelect(MenuButtons[CursorPos]);
-  }
+  bool isEnabled;
 
   void Update() {
+    if (!isEnabled) return;
+
     if (Input.GetButtonDown("Horizontal")) {
       HorizontalMovement(Input.GetAxisRaw("Horizontal"));
     }
     else if (Input.GetButtonDown("Vertical")) {
       VerticalMovement(Input.GetAxisRaw("Vertical"));
+    } else if (Input.GetButtonDown("Fire1")) {
+      OnSubmit();
     }
   }
-  
-  public void VerticalMovement(float input) {
+
+  public virtual void VerticalMovement(float input) {
     CursorPos -= (int)input;
-    CursorPos %= menuSize;
+    CursorPos %= MenuButtons.Count;
     if (CursorPos < 0) {
-      CursorPos += menuSize;
+      CursorPos += MenuButtons.Count;
     }
-    // Debug.Log($"Vertical: { input } CursorPos: {CursorPos} PageSize: { pageSize }");
     OnButtonSelect(MenuButtons[CursorPos]);
   }
 
-  public void HorizontalMovement(float input) {
-    // swap menu
-  }
-
-  public void Subscribe(MenuButton button) {
-    MenuButtons.Add(button);
-    Debug.Log("Adding");
-    button.cursor.color = Color.clear;
-  }
+  public virtual void HorizontalMovement(float input) { }
 
   public void OnButtonSelect(MenuButton button) {
     AudioManager.instance.PlaySfx("Cursor1");
     ResetButtons();
     button.cursor.color = Color.white;
-    button.cursor.sprite = selectedSprite;
   }
 
-  public void OnButtonSubmit(MenuButton button) {
+  public virtual void OnSubmit() {
+    AudioManager.instance.PlaySfx("Select1");
     ResetButtons();
-    button.cursor.sprite = selectedSprite;
-    Debug.Log("Submitting");
+    MenuButtons[CursorPos].cursor.color = Color.white;
   }
 
   public void ResetButtons() {
-    Debug.Log("Reset");
     foreach (var button in MenuButtons) {
       button.cursor.color = Color.clear;
     }
   }
 
   public void Enable() {
-    OnButtonSelect(MenuButtons[CursorPos]);
+    ResetButtons();
+    isEnabled = true;
+    Show();
+    MenuButtons[CursorPos].cursor.color = Color.white;
   }
 
   public void Disable() {
+    isEnabled = false;
   }
 
-  public void Hide() {
-    gameObject.SetActive(false);
-    Enable();
-  }
+  public void Hide() => gameObject.SetActive(false);
   public void Show() => gameObject.SetActive(true);
 }

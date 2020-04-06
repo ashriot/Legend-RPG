@@ -76,7 +76,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.6
-  m_Text: /1000
+  m_Text: /999
 --- !u!1 &8455398888532108251
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 8455398890365916380}
   - component: {fileID: 8455398890365916381}
   - component: {fileID: 8455398890365916382}
+  - component: {fileID: 851342017}
   m_Layer: 5
   m_Name: Hero Panel
   m_TagString: Untagged
@@ -444,6 +445,22 @@ MonoBehaviour:
   Cursor: {fileID: 8455398889606777159}
   Initiative: 0
   Unit: {fileID: 0}
+  commandToExecute: {fileID: 0}
+  targetOfCommand: {fileID: 0}
   Hp: {fileID: 8455398888532110373}
   MaxHp: {fileID: 8455398888261326305}
   LastUsedAction: {fileID: 0}
+--- !u!114 &851342017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8455398890365916371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f796de0ebe3087e489547277ae6380bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ButtonMenu: {fileID: 0}
+  cursor: {fileID: 0}
