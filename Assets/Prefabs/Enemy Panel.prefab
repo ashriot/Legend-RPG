@@ -352,8 +352,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f796de0ebe3087e489547277ae6380bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonMenu: {fileID: 0}
-  cursor: {fileID: 1271441378657172721}
+  Cursor: {fileID: 1271441378657172721}
+  Command: {fileID: 0}
 --- !u!1 &7511543675709933877
 GameObject:
   m_ObjectHideFlags: 0

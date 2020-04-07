@@ -7,7 +7,7 @@ public class FightMenu : ButtonMenu {
     base.OnSubmit();
     Debug.Log("Fight Menu Submit");
 
-    MenuButtons[CursorPos].command.Execute();
+    // MenuButtons[CursorPos].command.Execute();
 
   }
 }

@@ -38,18 +38,18 @@ public class ButtonMenu : MonoBehaviour {
   public void OnButtonSelect(MenuButton button) {
     AudioManager.instance.PlaySfx("Cursor1");
     ResetButtons();
-    button.cursor.color = Color.white;
+    button.Cursor.color = Color.white;
   }
 
   public virtual void OnSubmit() {
     AudioManager.instance.PlaySfx("Select1");
     ResetButtons();
-    MenuButtons[CursorPos].cursor.color = Color.white;
+    MenuButtons[CursorPos].Cursor.color = Color.white;
   }
 
   public void ResetButtons() {
     foreach (var button in MenuButtons) {
-      button.cursor.color = Color.clear;
+      button.Cursor.color = Color.clear;
     }
   }
 
@@ -57,11 +57,12 @@ public class ButtonMenu : MonoBehaviour {
     ResetButtons();
     isEnabled = true;
     Show();
-    MenuButtons[CursorPos].cursor.color = Color.white;
+    MenuButtons[CursorPos].Cursor.color = Color.white;
   }
 
   public void Disable() {
     isEnabled = false;
+    ResetButtons();
   }
 
   public void Hide() => gameObject.SetActive(false);
