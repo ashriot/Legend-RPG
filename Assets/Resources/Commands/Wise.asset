@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wise
   Description: 
-  Sprite: {fileID: 6817413381993266228, guid: ba68f233d8971f84a8f297d42be540cc, type: 3}
+  Sprite: {fileID: 7255796563199896511, guid: 31092c585351456408173320c39be8eb, type: 3}
   MaxAmt: 14
   CurrentAmt: 14
   Action: {fileID: 0}

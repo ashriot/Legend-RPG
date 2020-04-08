@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Devil
   m_EditorClassIdentifier: 
   Id: devil
-  Name: Devil
+  Name: Devli'l
   Sprite: {fileID: 8548960543114135391, guid: b0a866780f36b184b9ee16477533ca8a, type: 3}
   BaseStats: 000000003200000007000000090000000600000003000000
   XpValue: 10

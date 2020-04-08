@@ -12,7 +12,7 @@ public class BattleManager : Singleton<BattleManager> {
   [Header("Panel Refs")]
   public HeroPanel[] HeroPanels;
   public EnemyPanel[] EnemyPanels;
-  public CommandMenu CommandMenu;
+  public CommandMenu CommandMenuL, CommandMenuR;
   public EnemyList EnemyList;
   public CurrentHeroPanel CurrentHeroPanel;
   public ButtonMenu FightMenu;
@@ -35,13 +35,12 @@ public class BattleManager : Singleton<BattleManager> {
   }
 
   void CleanupBattleScene() {
-    CommandMenu.Hide();
+    CommandMenuL.Hide();
+    CommandMenuR.Hide();
     CurrentHeroPanel.gameObject.SetActive(false);
     FightMenu.Hide();
     EnemyMenu.Disable();
     HeroMenu.Disable();
-    CommandMenu.Disable();
-    FightMenu.Disable();
   }
 
   void InitializeBattle(string[] enemiesToLoad) {
@@ -126,7 +125,7 @@ public class BattleManager : Singleton<BattleManager> {
   void FightCheck() {
     SetupEnemyList();
     turnOrder.Clear();
-    FightMenu.Enable();
+    FightMenu.Show();
     Debug.Log("Enabling Fight Menu");
   }
 
@@ -137,19 +136,9 @@ public class BattleManager : Singleton<BattleManager> {
     currentPanel = turnOrder[0];
     turnOrder.RemoveAt(0);
 
-    if (((HeroPanel)currentPanel).LastUsedAction is null) {
-      CommandMenu.CursorPos = 0;
-    }
-    var commands = ((Hero)currentPanel.Unit).Commands.Where(c => c != null).ToList();
-    // for (var i = 0; i < CommandMenu.Commands.Length; i++) {
-    //   if (i < commands.Count) {
-    //     CommandMenu.Commands[i].Setup(commands[i]);
-    //   } else {
-    //     CommandMenu.Commands[i].Clear();
-    //   }
-    // }
+    
     CurrentHeroPanel.Setup(currentPanel);
-    CommandMenu.gameObject.SetActive(true);
+    CommandMenuL.gameObject.SetActive(true);
 
   }
 
@@ -160,6 +149,18 @@ public class BattleManager : Singleton<BattleManager> {
       Debug.Log($"{ activeBattlers[i].Unit.Name}: { activeBattlers[i].Initiative }");
     }
     turnOrder = activeBattlers.OrderByDescending(t => t.Initiative).ToList();
+  }
+
+  public void ClickFightMenuButton(Command command) {
+    currentPanel = HeroPanels[0];
+    if (command.Name == "Fight") {
+      MenuManager.GetInstance().SwitchMenus(CommandMenuL.Setup((HeroPanel)currentPanel));
+      CurrentHeroPanel.Setup(currentPanel);
+    }
+
+    else {
+      Debug.LogError("Missing case for fight button!");
+    }
   }
 
   public void ClickCommand(int buttonId) {

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0748e9c2ff0f9a40883163d609f1c94, type: 3}
-  m_Name: Short
+  m_Name: Short Sword
   m_EditorClassIdentifier: 
-  Name: Short
+  Name: Short Sword
   Description: 
-  Sprite: {fileID: -4297203505398261690, guid: ba68f233d8971f84a8f297d42be540cc, type: 3}
+  Sprite: {fileID: -606276703001410613, guid: 31092c585351456408173320c39be8eb, type: 3}
   MaxAmt: 30
   CurrentAmt: 30
   Action: {fileID: 11400000, guid: dfea0590aeff09446b88a6ecf0d3b405, type: 2}

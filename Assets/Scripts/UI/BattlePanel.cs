@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BattlePanel : MonoBehaviour {
+public abstract class BattlePanel : MonoBehaviour {
   public Image Image;
-  public GameObject Cursor;
   public int Initiative;
   public Unit Unit;
   public bool IsHero { get { return Unit?.GetType() == typeof(Hero); } }

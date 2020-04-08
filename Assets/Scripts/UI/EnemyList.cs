@@ -21,4 +21,8 @@ public class EnemyList : MonoBehaviour {
       EnemyQtyText[i].text = EnemyQty[i].ToString();
     }
   }
+
+  public void Hide() {
+    gameObject.SetActive(false);
+  }
 }

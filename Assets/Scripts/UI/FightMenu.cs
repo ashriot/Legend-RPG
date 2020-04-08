@@ -1,13 +1,10 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FightMenu : ButtonMenu {
 
-  public override void OnSubmit() {
-    base.OnSubmit();
-    Debug.Log("Fight Menu Submit");
-
-    // MenuButtons[CursorPos].command.Execute();
-
+  public override void Submit() {
+    base.Submit();
+    Debug.Log($"Fight Menu Submit -> { ((CommandButton)MenuButtons[CursorPos]).Command.Name }");
+    BattleManager.GetInstance().ClickFightMenuButton(((CommandButton)MenuButtons[CursorPos]).Command);
   }
 }

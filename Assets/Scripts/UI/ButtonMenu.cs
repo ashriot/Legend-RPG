@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ButtonMenu : MonoBehaviour {
 
+  public MenuManager MenuManager;
   public ButtonMenu nextMenu;
-  public List<MenuButton> MenuButtons;
+  public MenuButton[] MenuButtons;
 
   public bool isActive { get { return gameObject.activeInHierarchy; } }
   public int CursorPos;
@@ -14,21 +14,22 @@ public class ButtonMenu : MonoBehaviour {
   void Update() {
     if (!isEnabled) return;
 
-    if (Input.GetButtonDown("Horizontal")) {
-      HorizontalMovement(Input.GetAxisRaw("Horizontal"));
-    }
-    else if (Input.GetButtonDown("Vertical")) {
-      VerticalMovement(Input.GetAxisRaw("Vertical"));
-    } else if (Input.GetButtonDown("Fire1")) {
-      OnSubmit();
-    }
+    // if (Input.GetButtonDown("Horizontal")) {
+    //   HorizontalMovement(Input.GetAxisRaw("Horizontal"));
+    // }
+    // else if (Input.GetButtonDown("Vertical")) {
+    //   VerticalMovement(Input.GetAxisRaw("Vertical"));
+    // } else if (Input.GetButtonDown("Fire1")) {
+    //   OnSubmit();
+    // }
   }
 
   public virtual void VerticalMovement(float input) {
-    CursorPos -= (int)input;
-    CursorPos %= MenuButtons.Count;
+    var pos = input > 0 ? 1 : -1;
+    CursorPos -= pos;
+    CursorPos %= MenuButtons.Length;
     if (CursorPos < 0) {
-      CursorPos += MenuButtons.Count;
+      CursorPos += MenuButtons.Length;
     }
     OnButtonSelect(MenuButtons[CursorPos]);
   }
@@ -41,7 +42,7 @@ public class ButtonMenu : MonoBehaviour {
     button.Cursor.color = Color.white;
   }
 
-  public virtual void OnSubmit() {
+  public virtual void Submit() {
     AudioManager.instance.PlaySfx("Select1");
     ResetButtons();
     MenuButtons[CursorPos].Cursor.color = Color.white;
@@ -54,9 +55,9 @@ public class ButtonMenu : MonoBehaviour {
   }
 
   public void Enable() {
+    MenuManager.SwitchMenus(this);
     ResetButtons();
     isEnabled = true;
-    Show();
     MenuButtons[CursorPos].Cursor.color = Color.white;
   }
 
@@ -65,6 +66,12 @@ public class ButtonMenu : MonoBehaviour {
     ResetButtons();
   }
 
-  public void Hide() => gameObject.SetActive(false);
-  public void Show() => gameObject.SetActive(true);
+  public void Hide() {
+    Disable();
+    gameObject.SetActive(false);
+  }
+  public void Show() {
+    Enable();
+    gameObject.SetActive(true);
+  }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0748e9c2ff0f9a40883163d609f1c94, type: 3}
-  m_Name: Heal
+  m_Name: Fight
   m_EditorClassIdentifier: 
-  Name: Heal
+  Name: Fight
   Description: 
-  Sprite: {fileID: -8809794641659170897, guid: 31092c585351456408173320c39be8eb, type: 3}
-  MaxAmt: 30
-  CurrentAmt: 6
-  Action: {fileID: 11400000, guid: f33e7589f257f4a48ac03732215233a7, type: 2}
+  Sprite: {fileID: -7681204938446855928, guid: 31092c585351456408173320c39be8eb, type: 3}
+  MaxAmt: 0
+  CurrentAmt: 0
+  Action: {fileID: 0}

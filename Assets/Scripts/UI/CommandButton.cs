@@ -1,8 +1,9 @@
 ﻿using UnityEngine.UI;
 
-public class CommandPanel : MenuButton {
+public class CommandButton : MenuButton {
   public Text Name, Amt;
   public Image Image;
+  public Command Command;
 
   public void Setup(Command command) {
     Command = command;
