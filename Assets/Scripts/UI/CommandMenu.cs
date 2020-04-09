@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 public class CommandMenu : ButtonMenu {
   
@@ -16,6 +17,12 @@ public class CommandMenu : ButtonMenu {
     }
 
     return this;
+  }
+
+  public override void Submit() {
+    base.Submit();
+    Debug.Log($"Command Menu Submit -> { ((CommandButton)MenuButtons[CursorPos]).Command.Name }");
+    BattleManager.GetInstance().ClickCommandButton(((CommandButton)MenuButtons[CursorPos]).Command);
   }
 }
 

@@ -5,7 +5,7 @@ public class Action : ScriptableObject {
   public string Name, Description;
   public Stats StatUsed, StatTargeted;
   public ActionTypes ActionType;
-  public TargetTypes TargetType;
+  public TargetType TargetType;
   public int Power, HitChance;
 }
 
@@ -18,7 +18,7 @@ public enum ActionTypes {
   Count
 }
 
-public enum TargetTypes {
+public enum TargetType {
   OneEnemy,
   OneRow,
   AllEnemies,

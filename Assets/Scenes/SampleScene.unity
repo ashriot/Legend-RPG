@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonMenus: []
+  previousMenu: {fileID: 0}
   activeMenu: {fileID: 0}
 --- !u!4 &73517810
 Transform:
@@ -1001,6 +1002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeroesToImport:
   - {fileID: 11400000, guid: e616b55065050144391d8536cbaaadd8, type: 2}
+  - {fileID: 11400000, guid: 5ac4e1c676b0cff4a9e976b5a452e4bd, type: 2}
   HeroPanels:
   - {fileID: 191389946}
   - {fileID: 1129064889}
@@ -2810,8 +2812,8 @@ GameObject:
   - component: {fileID: 575380411}
   - component: {fileID: 575380413}
   - component: {fileID: 575380412}
-  - component: {fileID: 575380414}
   - component: {fileID: 575380415}
+  - component: {fileID: 575380414}
   m_Layer: 5
   m_Name: Enemy Menu
   m_TagString: Untagged
@@ -2887,7 +2889,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 575380410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f709349c7d0e86c42aa3f957056253f5, type: 3}
+  m_Script: {fileID: 11500000, guid: eddabfa2707ae854d82cd0ac53451c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MenuManager: {fileID: 73517809}

@@ -6,7 +6,7 @@ public abstract class BattlePanel : MonoBehaviour {
   public int Initiative;
   public Unit Unit;
   public bool IsHero { get { return Unit?.GetType() == typeof(Hero); } }
-  public bool IsDead { get { return Unit?.CurHp > 0; } }
+  public bool IsAlive { get { return Unit?.CurHp > 0; } }
 
   [HideInInspector]
   public Command commandToExecute;

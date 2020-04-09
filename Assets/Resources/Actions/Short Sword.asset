@@ -16,6 +16,7 @@ MonoBehaviour:
   Description: 
   StatUsed: 2
   StatTargeted: 6
-  Type: 0
-  Power: 6
+  ActionType: 0
+  TargetType: 0
+  Power: 20
   HitChance: 90

@@ -18,5 +18,5 @@ MonoBehaviour:
   StatTargeted: 5
   ActionType: 1
   TargetType: 0
-  Power: 8
+  Power: 25
   HitChance: 100

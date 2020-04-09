@@ -14,4 +14,8 @@ public class CurrentHeroPanel : MonoBehaviour
     MaxHp.text = $"/{ panel.Unit.MaxHp }";
     gameObject.SetActive(true);
   }
+
+  public void Hide() {
+    gameObject.SetActive(false);
+  }
 }

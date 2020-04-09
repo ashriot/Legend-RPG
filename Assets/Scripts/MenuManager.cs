@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class MenuManager : Singleton<MenuManager> {
 
   public List<ButtonMenu> buttonMenus;
+  public ButtonMenu previousMenu;
   public ButtonMenu activeMenu;
 
   PlayerInputActions inputAction;
@@ -25,10 +26,7 @@ public class MenuManager : Singleton<MenuManager> {
   }
 
   public void SwitchMenus(ButtonMenu menu) {
-    // if (activeMenu != null) {
-    //   activeMenu.gameObject.SetActive(false);
-    // }
-
+    previousMenu = activeMenu;
     activeMenu = menu;
   }
 
@@ -40,18 +38,7 @@ public class MenuManager : Singleton<MenuManager> {
     var menu = inputAction.PlayerControls.Menu.triggered;
     var directionTriggered = inputAction.PlayerControls.Directional.triggered;
 
-    if (ok) {
-      Debug.Log("OK pressed");
-    }
-    if (cancel) {
-      Debug.Log("Cancel pressed");
-    }
-    if (menu) {
-      Debug.Log("Menu pressed");
-    }
-
     if (v != 0 && directionTriggered) {
-      Debug.Log("Vertical movement from new script");
       activeMenu.VerticalMovement(v);
     } else if (h != 0 && directionTriggered) {
       activeMenu.HorizontalMovement(h);

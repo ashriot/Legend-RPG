@@ -32,6 +32,7 @@ public class ButtonMenu : MonoBehaviour {
       CursorPos += MenuButtons.Length;
     }
     OnButtonSelect(MenuButtons[CursorPos]);
+    Debug.Log(CursorPos);
   }
 
   public virtual void HorizontalMovement(float input) { }
