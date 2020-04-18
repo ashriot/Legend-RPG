@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Scorch
   Description: 
-  StatUsed: 5
-  StatTargeted: 5
+  StatUsed: 4
+  StatTargeted: 4
   ActionType: 1
   TargetType: 0
-  Power: 25
+  Power: 4
   HitChance: 100

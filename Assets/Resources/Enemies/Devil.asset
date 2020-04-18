@@ -15,5 +15,12 @@ MonoBehaviour:
   Id: devil
   Name: Dev'lil
   Sprite: {fileID: 8548960543114135391, guid: b0a866780f36b184b9ee16477533ca8a, type: 3}
-  BaseStats: 32000000320000000700000009000000060000000300000003000000
+  Commands:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  BaseStats: 320000003200000004000000060000000600000005000000
   XpValue: 10

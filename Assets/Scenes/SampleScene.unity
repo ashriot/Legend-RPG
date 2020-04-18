@@ -1002,7 +1002,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HeroesToImport:
   - {fileID: 11400000, guid: e616b55065050144391d8536cbaaadd8, type: 2}
+  - {fileID: 11400000, guid: 0342f9ff40439ef40af43bf9a92fdb4a, type: 2}
   - {fileID: 11400000, guid: 5ac4e1c676b0cff4a9e976b5a452e4bd, type: 2}
+  - {fileID: 11400000, guid: 6772d76f9d57f754caa73968b25db4a5, type: 2}
   HeroPanels:
   - {fileID: 191389946}
   - {fileID: 1129064889}
@@ -2165,7 +2167,7 @@ MonoBehaviour:
   Name: {fileID: 917202859}
   Amt: {fileID: 0}
   Image: {fileID: 831357065}
-  Command: {fileID: 0}
+  Command: {fileID: 11400000, guid: 9fb6be93ec15fc84a80c75082a450d76, type: 2}
 --- !u!222 &421150699
 CanvasRenderer:
   m_ObjectHideFlags: 0

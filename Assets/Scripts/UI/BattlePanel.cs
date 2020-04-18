@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class BattlePanel : MonoBehaviour {
@@ -7,6 +8,7 @@ public abstract class BattlePanel : MonoBehaviour {
   public Unit Unit;
   public bool IsHero { get { return Unit?.GetType() == typeof(Hero); } }
   public bool IsAlive { get { return Unit?.CurHp > 0; } }
+  public List<Command> Commands;
 
   [HideInInspector]
   public Command commandToExecute;
@@ -15,7 +17,14 @@ public abstract class BattlePanel : MonoBehaviour {
 
   // status effects
 
-  public virtual void Setup() {}
+  public virtual void Setup() {
+    foreach(var command in Unit.Commands) {
+      if (command is null) return;
+      
+      Debug.Log("Adding command");
+      Commands.Add(Instantiate(command));
+    }
+  }
 
   public void RollInitiative() {
     Initiative = Random.Range(0, Unit.Agility);

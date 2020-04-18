@@ -6,6 +6,7 @@ public abstract class Unit : ScriptableObject {
   public string Name;
   public Sprite Sprite;
   public bool IsDead { get { return CurHp <= 0; } }
+  public Command[] Commands = new Command[6];
 
 	[LabeledArray(typeof(Stats))]
 	public int[] BaseStats = new int[(int)Stats.Count];
@@ -28,11 +29,6 @@ public abstract class Unit : ScriptableObject {
 	public int Agility { 
 		get { return GetStat(Stats.Agi); }
 		set { SetStat(Stats.Agi, value); }
-	}
-
-	public int Endurance { 
-		get { return GetStat(Stats.End); }
-		set { SetStat(Stats.End, value); }
 	}
 
 	public int Magic {
@@ -61,7 +57,6 @@ public abstract class Unit : ScriptableObject {
     Stats.Hp,
     Stats.MaxHp,
     Stats.Str,
-    Stats.End,
     Stats.Agi,
     Stats.Mag,
     Stats.Def
@@ -85,13 +80,6 @@ public abstract class Unit : ScriptableObject {
 		if (index != -1) { BaseStats[index] = value; }
 	}
 
-  public void CalculateMaxHp () {
-    var strHp = Strength * 2;
-    var endHp = Endurance * 6;
-    var defHp = Defense * 2;
-    MaxHp = strHp + endHp + defHp;
-    CurHp = Random.Range(1, MaxHp);
-  }
 
 	// public int GetBaseGrowth (Stats type) {
 	// 	int index = IndexForStat(type);
@@ -113,7 +101,6 @@ public enum Stats {
   MaxHp,
   Str,
   Agi,
-  End,
   Mag,
   Def,
   Count

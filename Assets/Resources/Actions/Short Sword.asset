@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Short Sword
   Description: 
   StatUsed: 2
-  StatTargeted: 6
+  StatTargeted: 5
   ActionType: 0
   TargetType: 0
-  Power: 20
-  HitChance: 90
+  Power: 5
+  HitChance: 0.9

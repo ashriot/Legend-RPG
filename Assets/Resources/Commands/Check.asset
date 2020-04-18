@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0748e9c2ff0f9a40883163d609f1c94, type: 3}
-  m_Name: Scorch
+  m_Name: Check
   m_EditorClassIdentifier: 
-  Name: Scorch
+  Name: Check
   Description: 
-  Sprite: {fileID: -6906195665277427621, guid: 31092c585351456408173320c39be8eb, type: 3}
-  MaxAmt: 20
-  CurrentAmt: 5
-  Action: {fileID: 11400000, guid: 348927c791d74cd46880df4f5a594877, type: 2}
+  Sprite: {fileID: 0}
+  MaxAmt: 0
+  CurrentAmt: 0
+  Action: {fileID: 0}

@@ -6,7 +6,7 @@ public class Action : ScriptableObject {
   public Stats StatUsed, StatTargeted;
   public ActionTypes ActionType;
   public TargetType TargetType;
-  public int Power, HitChance;
+  public float Power, HitChance;
 }
 
 public enum ActionTypes {

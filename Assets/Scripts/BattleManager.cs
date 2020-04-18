@@ -146,6 +146,10 @@ public class BattleManager : Singleton<BattleManager> {
   public void ClickFightButton(Command command) {
     if (command.Name == "Fight") {
       NextHeroInput();
+    } else if (command.Name == "Check") {
+      Debug.Log("Checking");
+      FightMenu.Hide();
+      EnemyList.Hide();
     }
 
     else {
@@ -215,10 +219,16 @@ public class BattleManager : Singleton<BattleManager> {
     
     switch (action.StatUsed) {
       case Stats.Str:
-        power += currentPanel.Unit.Strength;
+        power *= currentPanel.Unit.Strength;
+        power += Random.Range(0, currentPanel.Unit.Strength);
         break;
       case Stats.Mag:
-        power += currentPanel.Unit.Magic;
+        power *= currentPanel.Unit.Magic;
+        power += Random.Range(0, currentPanel.Unit.Magic);
+        break;
+      case Stats.Agi:
+        power *= currentPanel.Unit.Agility;
+        power += Random.Range(0, currentPanel.Unit.Agility);
         break;
       default:
         break;
@@ -226,14 +236,16 @@ public class BattleManager : Singleton<BattleManager> {
 
     switch (action.StatTargeted) {
       case Stats.Def:
-        power -= target.Unit.Defense;
+        power -= target.Unit.Defense * 3;
         break;
       case Stats.Mag:
-        power -= target.Unit.Magic;
+        power *= (200 - target.Unit.Magic) / 200f;
         break;
       default:
         break;
     }
+
+    power = power > 0 ? Mathf.Floor(power) : 0;
 
     Debug.Log($"{ currentPanel.Unit.Name } used { currentPanel.commandToExecute.Name }! { currentPanel.targetOfCommand.Unit.Name } took { power } damage!");
   }

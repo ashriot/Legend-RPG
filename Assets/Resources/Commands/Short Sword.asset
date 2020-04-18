@@ -16,5 +16,5 @@ MonoBehaviour:
   Description: 
   Sprite: {fileID: -606276703001410613, guid: 31092c585351456408173320c39be8eb, type: 3}
   MaxAmt: 30
-  CurrentAmt: 30
+  CurrentAmt: 10
   Action: {fileID: 11400000, guid: dfea0590aeff09446b88a6ecf0d3b405, type: 2}

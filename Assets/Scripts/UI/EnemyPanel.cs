@@ -7,6 +7,7 @@ public class EnemyPanel : BattlePanel
   public Text HitChance;
 
   public override void Setup() {
+    base.Setup();
     Image.sprite = Unit.Sprite;
     HpBar.fillAmount = (float)Unit.CurHp / Unit.MaxHp;
   }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5089c64728ca8624ebe2283b7cab82c9, type: 3}
-  m_Name: Fighter
+  m_Name: Wizard
   m_EditorClassIdentifier: 
-  Id: fighter
-  Name: Fighter
-  Sprite: {fileID: 1453467047621127920, guid: 31092c585351456408173320c39be8eb, type: 3}
+  Id: wizard
+  Name: Wizard
+  Sprite: {fileID: 168478334239142865, guid: 31092c585351456408173320c39be8eb, type: 3}
   Commands:
   - {fileID: 11400000, guid: 30d4628d78ffcc046bc38a6dbaa0bc5d, type: 2}
   - {fileID: 11400000, guid: 0fd2a48b523b37b47a4ad82144b43bd7, type: 2}
@@ -24,5 +24,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fd2a48b523b37b47a4ad82144b43bd7, type: 2}
   - {fileID: 11400000, guid: 80c60a1478efe0141a0c73585985faae, type: 2}
   - {fileID: 11400000, guid: bf3dfb2d694736840b5c92bcce6bddc1, type: 2}
-  BaseStats: 460000004600000006000000040000000200000005000000
+  BaseStats: 2d0000002d00000002000000040000000600000003000000
   BonusStats: 00000000000000000000000000000000000000000000000000000000
