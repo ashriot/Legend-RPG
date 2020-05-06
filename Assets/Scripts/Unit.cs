@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public abstract class Unit : ScriptableObject {
+public abstract class Unit : MonoBehaviour {
 
   public string Id;
   public string Name;
   public Sprite Sprite;
   public bool IsDead { get { return CurHp <= 0; } }
-  public Command[] Commands = new Command[6];
+  public string[] Commands = new string[8];
 
 	[LabeledArray(typeof(Stats))]
 	public int[] BaseStats = new int[(int)Stats.Count];
@@ -31,7 +31,7 @@ public abstract class Unit : ScriptableObject {
 		set { SetStat(Stats.Agi, value); }
 	}
 
-	public int Magic {
+	public int Psyche {
 		get { return GetStat(Stats.Mag); }
 		set { SetStat(Stats.Mag, value); }
 	}
@@ -80,7 +80,6 @@ public abstract class Unit : ScriptableObject {
 		if (index != -1) { BaseStats[index] = value; }
 	}
 
-
 	// public int GetBaseGrowth (Stats type) {
 	// 	int index = IndexForStat(type);
 	// 	return index != -1 ? statGrowth[index] : 0;
@@ -94,14 +93,4 @@ public abstract class Unit : ScriptableObject {
 	int IndexForStat (Stats type) {
     return (int)type;
 	}
-}
-
-public enum Stats {
-  Hp,
-  MaxHp,
-  Str,
-  Agi,
-  Mag,
-  Def,
-  Count
 }

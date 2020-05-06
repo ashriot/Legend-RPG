@@ -38,13 +38,13 @@ public class ButtonMenu : MonoBehaviour {
   public virtual void HorizontalMovement(float input) { }
 
   public void OnButtonSelect(MenuButton button) {
-    AudioManager.instance.PlaySfx("Cursor1");
+    AudioManager.GetInstance().PlaySfx("Cursor1");
     ResetButtons();
     button.Cursor.color = Color.white;
   }
 
   public virtual void Submit() {
-    AudioManager.instance.PlaySfx("Select1");
+    AudioManager.GetInstance().PlaySfx("Select1");
     ResetButtons();
     MenuButtons[CursorPos].Cursor.color = Color.white;
   }

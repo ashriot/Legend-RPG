@@ -20,8 +20,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component {
   }
 
   /* IMPORTANT!!! To use Awake in a derived class you need to do it this way
-   * protected override void Awake()
-   * {
+   * protected override void Awake() {
    *     base.Awake();
    *     //Your code goes here
    * }
@@ -30,7 +29,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Component {
   protected virtual void Awake() {
     if (instance == null) {
       instance = this as T;
-      DontDestroyOnLoad(gameObject);
+      // DontDestroyOnLoad(gameObject);
     }
     else if (instance != this as T) {
       Destroy(gameObject);

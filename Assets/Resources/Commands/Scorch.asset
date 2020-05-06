@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Scorch
   Description: 
-  Sprite: {fileID: -6906195665277427621, guid: 31092c585351456408173320c39be8eb, type: 3}
+  Sprite: {fileID: 8890533060992490834, guid: ba68f233d8971f84a8f297d42be540cc, type: 3}
   MaxAmt: 20
   CurrentAmt: 5
   Action: {fileID: 11400000, guid: 348927c791d74cd46880df4f5a594877, type: 2}

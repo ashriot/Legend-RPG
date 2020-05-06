@@ -81,3 +81,9 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     source: {fileID: 0}
+  - name: Blip1
+    clip: {fileID: 8300000, guid: d14ba6f1b17a72c43b56ca4e8eae102b, type: 3}
+    loop: 0
+    volume: 1
+    pitch: 1
+    source: {fileID: 0}

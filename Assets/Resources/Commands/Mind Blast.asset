@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mind Blast
   Description: 
-  Sprite: {fileID: 2914750414084420580, guid: 31092c585351456408173320c39be8eb, type: 3}
+  Sprite: {fileID: 3684451196668631297, guid: ba68f233d8971f84a8f297d42be540cc, type: 3}
   MaxAmt: 3
   CurrentAmt: 3
   Action: {fileID: 0}

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public abstract class BattlePanel : MonoBehaviour {
   public Image Image;
   public int Initiative;
-  public Unit Unit;
-  public bool IsHero { get { return Unit?.GetType() == typeof(Hero); } }
+  public UnitScript Unit;
+  public bool IsHero { get { return Unit?.GetType() == typeof(HeroScript); } }
   public bool IsAlive { get { return Unit?.CurHp > 0; } }
   public List<Command> Commands;
 

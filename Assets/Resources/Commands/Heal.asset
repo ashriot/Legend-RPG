@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Heal
   Description: 
-  Sprite: {fileID: -8809794641659170897, guid: 31092c585351456408173320c39be8eb, type: 3}
+  Sprite: {fileID: 6817413381993266228, guid: ba68f233d8971f84a8f297d42be540cc, type: 3}
   MaxAmt: 30
   CurrentAmt: 6
   Action: {fileID: 11400000, guid: f33e7589f257f4a48ac03732215233a7, type: 2}
